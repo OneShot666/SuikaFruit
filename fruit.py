@@ -7,25 +7,37 @@ import pygame
 
 # Fruits (x11) : cerise, fraise, raisin, clémentine, orange, pomme, pamplemousse, pêche, ananas, melon, pastèque
 class Fruit(pygame.sprite.Sprite):
-    def __init__(self, name, color, radius=10, weight=1, score=10):
+    def __init__(self, name, color, radius=10, weight=1, score=10, fruit_image=False):
         super().__init__()
         self.name = name
         self.color = color
         self.border_color = self.get_border_color()
+        self.reflect_color = self.get_reflect_color()
         self.radius = radius
         self.width = int(self.radius * 0.1)
         self.weight = weight
         self.score = score
-        self.image = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)
-        pygame.draw.circle(self.image, self.color, (self.radius, self.radius), self.radius)
-        pygame.draw.circle(self.image, self.border_color, (self.radius, self.radius), self.radius, self.width)
+        if fruit_image:
+            self.image = pygame.image.load(f"images/{self.name}.png")
+            self.image.set_colorkey((255, 255, 255))
+            self.image = pygame.transform.scale(self.image, (self.radius * 2, self.radius * 2))
+        else:
+            self.image = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)
+            pygame.draw.circle(self.image, self.color, (self.radius, self.radius), self.radius)
+            pygame.draw.circle(self.image, self.border_color, (self.radius, self.radius), self.radius, self.width)
+            reflect = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)
+            pygame.draw.ellipse(reflect, "white", (self.radius * 0.4, self.radius * 0.4,
+                                                   self.radius * 0.5, self.radius * 0.25))
+            reflect = pygame.transform.rotate(reflect, 45)                      # Rotate reflect surface
+            reflect.set_alpha(96)                                               # Make reflect half transparent
+            self.image.blit(reflect, (-self.radius * 0.2, -self.radius * 0.7))  # Position reflect correctly
         self.rect = self.image.get_rect(center=(0, 0))
         self.vel_x = 0
         self.vel_y = 0
         # data
-        self.gravity = gravity                                                  # Force that make object fall
         self.min_speed = 0.1                                                    # Stop below that speed
         self.max_speed = 10                                                     # Can't go faster
+        self.gravity = gravity                                                  # Force that make object fall
         self.resistance = resistance                                            # Force that slow down objects speed
         self.drag_coeff = drag_coeff                                            # Force of drag on objects
 
@@ -42,6 +54,15 @@ class Fruit(pygame.sprite.Sprite):
                 border[index] = int(rgb * 1.3)
                 border[index] = 255 if border[index] > 255 else border[index]
             return tuple(border)
+        return self.color
+
+    def get_reflect_color(self):
+        reflect = [0, 0, 0]
+        if type(self.color) == tuple:
+            for index, rgb in enumerate(self.color):
+                reflect[index] = int(rgb * 2)
+                reflect[index] = 255 if reflect[index] > 255 else reflect[index]
+            return tuple(reflect)
         return self.color
 
     def draw(self, surface):
@@ -71,12 +92,13 @@ class Fruit(pygame.sprite.Sprite):
         self.rect.x += self.vel_x
         self.rect.y += self.vel_y
 
-    def collide_circle(self, circle):                                           # Check if self collide with circle
+    def collide_circle(self, circle, diff_value):                               # Check if self collide with circle
         distance = sqrt(pow((circle.rect.x + circle.radius) - (self.rect.x + self.radius), 2) +
                     pow((circle.rect.y + circle.radius) - (self.rect.y + self.radius), 2))
         ecart = self.radius + circle.radius + self.min_speed
+        gap_coeff = 0.95 if diff_value == 0 else 1
 
-        if distance <= ecart:                                                   # if circles collide
+        if distance <= ecart * gap_coeff:                                       # if circles collide
             # vector between circles
             direction = pygame.math.Vector2(circle.rect.center) - pygame.math.Vector2(self.rect.center)
             try: direction.normalize_ip()                                       # if both centers at same place
@@ -85,8 +107,9 @@ class Fruit(pygame.sprite.Sprite):
             force = (ecart - distance) / dist_max * self.max_speed              # Function to get repulsion force
             force = self.max_speed if force > self.max_speed else - self.max_speed if force < - self.max_speed else force
             # Make fruit go to opposite direction
-            self.vel_x -= round(direction.x * force, 2)
-            vel_y = round(direction.y * force, 2)                               # Test to vanilla velocity
+            vel_coeff = 1.25 if diff_value == 3 else 1.1 if diff_value == 2 else 1
+            self.vel_x -= round(direction.x * force, 2) * vel_coeff
+            vel_y = round(direction.y * force, 2) * vel_coeff                   # Test to vanilla velocity
             self.vel_y -= vel_y * lift if vel_y > 0 else vel_y                  # Increase repulsion force from above
 
             return True
