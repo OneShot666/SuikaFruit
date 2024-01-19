@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, degrees
 # from random import *
 # from time import *
 from PIL import Image
@@ -9,7 +9,7 @@ import pymunk
 
 # Fruits (x11) : cerise, fraise, raisin, clémentine, orange, pomme, pamplemousse, pêche, ananas, melon, pastèque
 class Fruit(pygame.sprite.Sprite):
-    def __init__(self, name, color, radius=10, weight=1, score=10, fruit_image=False, elasticity=0.4, friction=0.5):
+    def __init__(self, name, color, radius=10, weight=1, score=10, fruit_image=False):
         super().__init__()
         self.name = name
         self.radius = radius
@@ -20,7 +20,7 @@ class Fruit(pygame.sprite.Sprite):
         # physics
         self.body = pymunk.Body()
         self.shape = pymunk.shapes.Circle(self.body, self.radius)
-        self.create_physics_body(None, elasticity, friction)
+        self.create_physics_body()
         # image
         self.color = color
         self.border_color = self.get_border_color()
@@ -66,9 +66,8 @@ class Fruit(pygame.sprite.Sprite):
             # self.image = pygame.image.load(f"images/fruits/{self.name}.png")
             # self.image.set_colorkey((255, 255, 255))
             # self.image = pygame.transform.scale(self.image, (self.radius * 2, self.radius * 2))
-            image = Image.open(f"images/fruits/{self.name}.png")                # For body in space
+            image = Image.open(f"images/skins/fruits/{self.name}.png")                # For body in space
             self.image = image.resize((self.radius * 2, self.radius * 2))
-            self.pos_x, self.pos_y = self.body.position.x, self.body.position.y
         else:
             self.image = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)
             pygame.draw.circle(self.image, self.color, (self.radius, self.radius), self.radius)
@@ -84,23 +83,36 @@ class Fruit(pygame.sprite.Sprite):
         # self.rect = self.image.get_rect(center=(0, 0))
         return self.image
 
-    def create_physics_body(self, pos=None, elasticity=0.4, friction=0.5):      # Used when add to Basket
+    def create_physics_body(self, pos=None, velocity=None, elasticity=None, friction=None):    # Used when add to Basket
+        velocity = velocity if velocity else (0, 0)
+        e = fruit_elasticity if elasticity is None else elasticity
+        f = fruit_friction if friction is None else friction
         self.body = pymunk.Body()
         self.body.position = pos if pos else (0, 0)
-        # image = Image.open(f"images/fruits/{self.name}.png")
-        # self.image = image.resize((self.radius * 2, self.radius * 2))
+        self.body.velocity = velocity
         self.shape = pymunk.shapes.Circle(self.body, self.radius)
         self.shape.mass = self.weight
-        self.shape.elasticity = elasticity
-        self.shape.friction = friction
+        self.shape.elasticity = e
+        self.shape.friction = f
 
-    def draw(self, surface):                                                    # Draw fruit on screen
+    def draw(self, surface, change_rotation=False, display_arrow=False):        # Draw fruit on screen
+        image = self.image
         if type(self.image) != pygame.surface.Surface:
-            self.image = pygame.image.fromstring(self.image.tobytes(),
-                                                 self.image.size, self.image.mode)  # PIL image from pygame image
-        # surface.blit(self.image, (self.body.position.x, self.body.position.y))
-        surface.blit(self.image, (self.pos_x, self.pos_y))
+            if change_rotation:
+                orientation = int(- degrees(self.body.angle) % 360)
+                image = self.image.rotate(orientation)
+            image = pygame.image.fromstring(image.tobytes(),
+                                            image.size, image.mode)             # PIL image from pygame image
+        self.pos_x, self.pos_y = self.body.position.x - self.radius, self.body.position.y - self.radius
+        self.vel_x, self.vel_y = self.body.velocity
+        surface.blit(image, (self.pos_x, self.pos_y))
 
+        if display_arrow:
+            center_coords = (self.pos_x + self.radius, self.pos_y + self.radius)
+            dir_coords = (center_coords[0] + self.vel_x, center_coords[1] + self.vel_y)
+            pygame.draw.line(surface, "yellow", center_coords, dir_coords, 3)
+
+    # Not use with new physics
     def update(self):                                                           # Apply forces and update position
         # Apply force of gravity
         coeff = (- 10 / (self.weight + 5)) + 2 + self.resistance                # Math function based on fruit weights
@@ -129,6 +141,7 @@ class Fruit(pygame.sprite.Sprite):
         gap_coeff = 0.95 if diff_value == 0 else 1
 
         if distance <= ecart * gap_coeff:                                       # if circles collide
+            """
             # vector between circles
             circle_center = (circle.pos_x + circle.radius, circle.pos_y + circle.radius)
             self_center = (self.pos_x + self.radius, self.pos_y + self.radius)
@@ -145,6 +158,7 @@ class Fruit(pygame.sprite.Sprite):
             self.vel_x -= round(direction.x * force, 2) * vel_coeff
             vel_y = round(direction.y * force, 2) * vel_coeff                   # Test to vanilla velocity
             self.vel_y -= vel_y * lift if vel_y > 0 else vel_y                  # Increase repulsion force from above
+            """
 
             return True
         return False
