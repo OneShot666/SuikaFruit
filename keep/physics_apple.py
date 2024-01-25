@@ -140,11 +140,11 @@ def draw(window, Box, rects, Balls, space=None, draw_options=None):
                rects[i][2] * 2 if rects[i][2] == thick else rects[i][2] + thick * 2,
                rects[i][3] * 2 if rects[i][3] == thick else rects[i][3] + thick * 2)
         pygame.draw.rect(window, "orange", pos, 0, thick)
-    for ball in Balls:                                                          # Display balls (hover Circles)
+    for ball in Balls:                                                          # Display ball (hover Circles)
         orientation = - int(degrees(ball[0].angle) % 360)
         if ball[0].angle != 0:
             print(f"{ball[0].angle} = {degrees(ball[0].angle)} ->  {orientation}")
-        pil_image = ball[0].image.rotate(orientation)
+        pil_image = ball[0].avatar.rotate(orientation)
         image = pygame.image.fromstring(pil_image.tobytes(), pil_image.size, pil_image.mode)  # PIL image from pygame image
         window.blit(image, (ball[0].position.x - ball[1].radius, ball[0].position.y - ball[1].radius))
     info = police.render(f"Taille : {apple_radius} px", True, "orange")

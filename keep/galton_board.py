@@ -32,7 +32,7 @@ R1, R2, R3, R4 = (x4, -100), (x4, y1), (x3, y2), (x3, y3)
 B1, B2 = (0, height), (width, height)
 
 
-# Create balls (dynamic)
+# Create ball (dynamic)
 def create_ball(space):
     ball_moment = pymunk.moment_for_circle(ball_mass, 0, ball_radius)               # Moment of inertia : turning force
     ball_body = pymunk.Body(ball_mass, ball_moment)
@@ -48,7 +48,7 @@ def create_ball(space):
 Balls = [([randrange(256) for _ in range(3)], create_ball(space)) for _ in range(nb_ball)]
 
 
-# Create walls for balls (static)
+# Create walls for ball (static)
 def create_segment(from_, to_, thickness, space, color):
     segment_shape = pymunk.Segment(space.static_body, from_, to_, thickness)
     segment_shape.color = pygame.color.THECOLORS[color]

@@ -1,34 +1,39 @@
 from math import sqrt, degrees
 # from random import *
 # from time import *
-from PIL import Image
+from PIL import Image, ImageDraw
 from data import *
+import webcolors
 import pygame
 import pymunk
 
 
-# Fruits (x11) : cerise, fraise, raisin, clémentine, orange, pomme, pamplemousse, pêche, ananas, melon, pastèque
+# Fruits (x11) : cherry, strawberry, grape, clementine, orange, apple, pear, peach, pineapple, melon, watermelon
 class Fruit(pygame.sprite.Sprite):
-    def __init__(self, name, color, radius=10, weight=1, score=10, fruit_image=False):
+    def __init__(self, name, color, radius=10, weight=1, score=10, skin_image=None):
         super().__init__()
         self.name = name
         self.radius = radius
         self.weight = weight
         self.score = score
-        self.vel_x = 0
-        self.vel_y = 0
+        self.size = (int(self.radius * 2), int(self.radius * 2))
+        self.width = int(self.radius * 0.1)
         # physics
         self.body = pymunk.Body()
         self.shape = pymunk.shapes.Circle(self.body, self.radius)
         self.create_physics_body()
+        self.pos_x = self.body.position.x - self.radius
+        self.pos_y = self.body.position.y - self.radius
+        self.vel_x = 0
+        self.vel_y = 0
         # image
         self.color = color
-        self.border_color = self.get_border_color()
-        self.reflect_color = self.get_reflect_color()
-        self.width = int(self.radius * 0.1)
-        self.image = self.set_image(fruit_image)
-        # self.rect = self.image.get_rect(center=(0, 0))
-        self.pos_x, self.pos_y = self.body.position.x, self.body.position.y
+        self.border_color = self.get_other_color(self.color)
+        self.bg_color = (255, 255, 255, 128)                                    # For bg image
+        self.reflect_alpha = 96                                                 # Transparency
+        self.image = self.set_image(skin_image)                                 # Circle or modifiable image
+        self.pygame_image = self.image if not skin_image else pygame.image.fromstring(
+            self.image.tobytes(), self.image.size, self.image.mode)             # Displayable image
         # data
         self.min_speed = 0.1                                                    # Stop below that speed
         self.max_speed = 10                                                     # Can't go faster
@@ -42,45 +47,49 @@ class Fruit(pygame.sprite.Sprite):
     def present(self):                                                          # Present self
         return f"{int(self.radius * 0.2)} cm  {self.weight} g  {self.score} pts"
 
-    def get_border_color(self):                                                 # Calculate border color
-        border = [0, 0, 0]
-        if type(self.color) is tuple:
-            for index, rgb in enumerate(self.color):
-                border[index] = int(rgb * 1.3)
+    def get_other_color(self, color, coeff=1.5):                                # Calculate border color
+        if type(color) is str:
+            color = self.get_color_value(color)
+        if color:
+            border = [0, 0, 0]
+            for index, rgb in enumerate(color):
+                border[index] = rgb + int((255 - rgb) * (coeff - 1) / coeff) \
+                                if coeff > 1.0 else int(rgb * coeff)
                 border[index] = 255 if border[index] > 255 else border[index]
+                border[index] = 0 if border[index] < 0 else border[index]
             return tuple(border)
-        return self.color
+        return color
 
-    def get_reflect_color(self):                                                # Calculate reflect color
-        reflect = [0, 0, 0]
-        if type(self.color) is tuple:
-            for index, rgb in enumerate(self.color):
-                reflect[index] = int(rgb * 2)
-                reflect[index] = 255 if reflect[index] > 255 else reflect[index]
-            return tuple(reflect)
-        return self.color
+    @staticmethod
+    def get_color_value(color_name: str):                                       # Get rgb from color name
+        try: return webcolors.name_to_rgb(color_name)
+        except ValueError: return None
 
-    def set_image(self, fruit_image):                                           # (re)set the image
-        self.width = int(self.radius * 0.1)
-        if fruit_image:
-            # self.image = pygame.image.load(f"images/fruits/{self.name}.png")
-            # self.image.set_colorkey((255, 255, 255))
-            # self.image = pygame.transform.scale(self.image, (self.radius * 2, self.radius * 2))
-            image = Image.open(f"images/skins/fruits/{self.name}.png")                # For body in space
-            self.image = image.resize((self.radius * 2, self.radius * 2))
-        else:
-            self.image = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)
+    def set_image(self, skin_image=None, using_bg=False):                       # (re)set the image
+        self.size = (int(self.radius * 2), int(self.radius * 2))
+        if skin_image:                                                          # Set skin
+            skin_image = skin_image.resize(self.size)
+            if using_bg:                                                        # Add bg skin
+                bg = Image.new('RGBA', self.size)
+                draw = ImageDraw.Draw(bg)
+                draw.ellipse((0, 0, self.size[0], self.size[1]), self.bg_color) # Draw transparent circle
+                bg.paste(skin_image, (0, 0), skin_image)                        # Superimposed skin on circle
+                skin_image = bg
+            self.image = skin_image
+            self.pygame_image = pygame.image.fromstring(self.image.tobytes(),
+                                self.image.size, self.image.mode)
+        else:                                                                   # Set circle
+            self.width = int(self.radius * 0.1)
+            self.image = pygame.Surface(self.size, pygame.SRCALPHA)
             pygame.draw.circle(self.image, self.color, (self.radius, self.radius), self.radius)
             pygame.draw.circle(self.image, self.border_color, (self.radius, self.radius), self.radius, self.width)
-            reflect = pygame.Surface((self.radius * 2, self.radius * 2), pygame.SRCALPHA)
+            reflect = pygame.Surface(self.size, pygame.SRCALPHA)
             pygame.draw.ellipse(reflect, "white", (self.radius * 0.4, self.radius * 0.4,
                                                    self.radius * 0.5, self.radius * 0.25))
             reflect = pygame.transform.rotate(reflect, 45)                      # Rotate reflect surface
-            reflect.set_alpha(96)                                               # Make reflect half transparent
+            reflect.set_alpha(self.reflect_alpha)                               # Make reflect half transparent
             self.image.blit(reflect, (-self.radius * 0.2, -self.radius * 0.7))  # Position reflect correctly
-            self.pos_x = self.image.get_rect(center=(0, 0)).x
-            self.pos_y = self.image.get_rect(center=(0, 0)).y
-        # self.rect = self.image.get_rect(center=(0, 0))
+
         return self.image
 
     def create_physics_body(self, pos=None, velocity=None, elasticity=None, friction=None):    # Used when add to Basket
@@ -101,13 +110,13 @@ class Fruit(pygame.sprite.Sprite):
             if change_rotation:
                 orientation = int(- degrees(self.body.angle) % 360)
                 image = self.image.rotate(orientation)
-            image = pygame.image.fromstring(image.tobytes(),
-                                            image.size, image.mode)             # PIL image from pygame image
+            image = image.resize(self.size)
+            image = pygame.image.fromstring(image.tobytes(), image.size, image.mode)
         self.pos_x, self.pos_y = self.body.position.x - self.radius, self.body.position.y - self.radius
         self.vel_x, self.vel_y = self.body.velocity
         surface.blit(image, (self.pos_x, self.pos_y))
 
-        if display_arrow:
+        if display_arrow:                                                       # Use only for test
             center_coords = (self.pos_x + self.radius, self.pos_y + self.radius)
             dir_coords = (center_coords[0] + self.vel_x, center_coords[1] + self.vel_y)
             pygame.draw.line(surface, "yellow", center_coords, dir_coords, 3)
@@ -141,7 +150,7 @@ class Fruit(pygame.sprite.Sprite):
         gap_coeff = 0.95 if diff_value == 0 else 1
 
         if distance <= ecart * gap_coeff:                                       # if circles collide
-            """
+            """ Old physics
             # vector between circles
             circle_center = (circle.pos_x + circle.radius, circle.pos_y + circle.radius)
             self_center = (self.pos_x + self.radius, self.pos_y + self.radius)
@@ -163,7 +172,7 @@ class Fruit(pygame.sprite.Sprite):
             return True
         return False
 
-    def collide_point(self, dot, percent=1):                                    # Check if dot touch circle
+    def collide_point(self, dot, percent=1):                                    # Check if dot touch self
         distance = sqrt(pow((dot[0]) - (self.pos_x + self.radius * percent), 2) +
                         pow((dot[1]) - (self.pos_y + self.radius * percent), 2))
         return distance <= self.radius * percent

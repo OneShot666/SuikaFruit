@@ -33,7 +33,7 @@ class Ball:
     def draw(self):                                                             # Draw ball on screen
         self.circle = pygame.draw.circle(screen, self.color, (self.x_pos, self.y_pos), self.radius)
 
-    def check_gravity(self):                                                    # How world interact with balls
+    def check_gravity(self):                                                    # How world interact with ball
         if not self.selected:
             if self.y_pos < HEIGHT - self.radius - (wall_thickness / 2):        # Fall if not on ground
                 self.y_speed += gravity
@@ -123,12 +123,12 @@ while run:
             if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
                 run = False
 
-        if event.type == pygame.MOUSEBUTTONDOWN:                                # Check if click on one of the balls
+        if event.type == pygame.MOUSEBUTTONDOWN:                                # Check if click on one of the ball
             if event.button == 1:
                 for ball in Balls:
                     ball.check_select(event.pos)
 
-        if event.type == pygame.MOUSEBUTTONUP:                                  # unselect all balls
+        if event.type == pygame.MOUSEBUTTONUP:                                  # unselect all ball
             if event.button == 1:
                 for ball in Balls:
                     ball.check_select((-1000, -1000))

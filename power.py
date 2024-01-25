@@ -1,6 +1,7 @@
 # from math import *
 # from random import *
 # from time import *
+from PIL import Image, ImageEnhance
 import pygame
 
 
@@ -12,8 +13,12 @@ class Power(pygame.sprite.Sprite):
         self.active = False                                                     # Not really used
         self.name = name
         self.description = description
-        self.image = pygame.image.load(f"images/icons/{name}.png").convert_alpha()
-        self.lock_image = pygame.image.load(f"images/icons/lock_{name}.png").convert_alpha()
+        self.image = Image.open(f"images/icons/{name}.png")
+        filtre = ImageEnhance.Color(self.image)
+        self.lock_image = filtre.enhance(0)                                     # Grayscale image
+        self.pygame_image = pygame.image.load(f"images/icons/{name}.png")       # Displayable image
+        self.pygame_lock_image = pygame.image.fromstring(self.lock_image.tobytes(),
+                                 self.lock_image.size, self.lock_image.mode)    # Displayable lock image
         self.cost = cost                                                        # Cost score
         self.level_unlock = level_unlock                                        # When power is unlocked
         self.pos = pos                                                          # In pixel (not used)
