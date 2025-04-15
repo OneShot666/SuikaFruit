@@ -2,6 +2,8 @@
 
 A puzzle game where you drop balls in a bag and merge them !
 
+It's more addictive than it looks like.
+
 ***
 ## Vocabulary :
 
@@ -25,7 +27,7 @@ A puzzle game where you drop balls in a bag and merge them !
 - The bigger a fruit get, the heavier it is.
 - The skins doesn't change the fruit's attributes, hitbox or gameplay, just it appearance.
 - A power will cost score and can be use once (Must be buy again to be reuse).
-- Difficulty "Impossible" only allow to drop the 4th first smallest fruit (instead of 5)
+- Difficulty "Impossible" only allow to drop the 4th first smallest fruit (instead of 5).
 
 ***
 ## Prerequisites :
@@ -61,13 +63,31 @@ A puzzle game where you drop balls in a bag and merge them !
 
 #### Methods
 - [RETURN] "Play" : result
-	- "Choose a speudo" : result
-	- "Choose a banner" : result
-	- "Choose an avatar" : result
+	- Connexion : result
+		- "Choose a speudo" : result
+		- "Choose a banner" : result
+		- "Choose an avatar" : result
+	- Game : result
+		- [LEFT CLICK] "Drop fruit" : result
+		- [H] "Hide/Show help line" : result
+		- [F] "Fruitopedia" : result
+		- [SPACE] "Pause game" : result
+		- [P] "Parameters" (mouse on toothed wheel icon) : result
+		- [RETURN] "Back to menu" : result
+			- "Back to menu ?" : result
+		- [Q] "Quit game" : result
+		- "Scoreboard" (mouse on score) : result
+		- "Watermelon" (mouse on watermelon): result
+		- "Profile" (mouse on avatar) : result
+		- "Skins" (mouse on clothes icon) : result
+		- "Shopping" (mouse on shop icon) : result
 - [A] "Profile" : result
 	- [LEFT CLICK] "Set avatar" : result
 	- [LEFT CLICK] "Set banner" : result
 - [H] "Help" : result
+- [M] "Mute" : result
+- [ARROW UP] : Increase music volume
+- [ARROW DOWN] : Reduce music volume
 - [P] "Parameters" : result
 	- "name" (options) : result
 	- "name" (options) : result
@@ -75,12 +95,6 @@ A puzzle game where you drop balls in a bag and merge them !
 	- "name" (options) : result
 	- "name" (options) : result
 - [Q] "Quit" : result
-- "name" (options) : result
-- "name" (options) : result
-- "name" (options) : result
-- "name" (options) : result
-- "name" (options) : result
-- "name" (options) : result
 
 -Images-
 ![Create your profile](images/screenshots/create_profile.png)
