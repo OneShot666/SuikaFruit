@@ -94,38 +94,40 @@ It's more addictive than it looks like.
 		- "Profile" (mouse on avatar) : Show the profile of the player.
 		- "Skins" (mouse on clothes icon) : Show the skins screen.
 		- "Shopping" (mouse on shop icon) : Show the shopping screen with the powers (cost score).
-- [A] "Profile" : result
-	- [LEFT CLICK] "Set avatar" : result
-	- [LEFT CLICK] "Set banner" : result
-- [H] "Help" : result
-- [M] "Mute" : result
-- [ARROW UP] : Increase music volume
-- [ARROW DOWN] : Reduce music volume
-- [P] "Parameters" : result
-	- [TAB] "Next parameter" : result
-	- [MAJ + TAB] "Previous parameter" : result
-	- [RETURN] "Modify checkbox" : result
-	- [ARROW LEFT/RIGHT] "Modify gradient" : result
-	- [N] "Next music" : result
-	- "Fullscreen" : result
-	- "Luminosity" : result
-	- "Gamma" : result
-	- "Save score" : result
-	- "Restart game" : result
-	- "Collect cookies" : result
-	- "Show scoreboard" : result
-	- "Show next fruit" : result
-	- "Show help line" : result
-	- "Difficulty" : result
-		- "Easy" : result
-		- "Medium" : result
-		- "Hard" : result
-		- "Impossible" : result
-	- "Draw bg behind skin" : result
-	- "Repeat music" : result
-	- "Music" : result
-	- "Sounds" : result
-- [Q] "Quit" : result
+- [A] "Profile" : Open the profile screen.
+	- [LEFT CLICK] "Set avatar" : To change player's skin. Open profile edition screen, skins tab.
+	- [LEFT CLICK] "Set banner" : To change player's banner. Open profile edition screen, banners tab.
+	- "Unlog" : Deconnect player's account. Will go back to main menu.
+- [H] "Help" : Open/close help note screen.
+- [M] "Mute" : Mute/unmute music.
+- [ARROW UP] : Increase music volume.
+- [ARROW DOWN] : Reduce music volume.
+- [P] "Parameters" : Open/close parameters screen.
+	- [TAB] "Next parameter" : Select next parameter for modification.
+	- [MAJ + TAB] "Previous parameter" : Select previous parameter for modification.
+	- [RETURN] "Modify checkbox" : Check/uncheck a checkbox parameter.
+	- [ARROW LEFT/RIGHT] "Modify gradient" : Modify the value of a gradient parameter.
+	- [N] "Next music" : Stop current music and play a random one.
+	- "Fullscreen" : Change the size of the screen to fullscreen or half the size.
+	- "Luminosity" : Change the luminosity of the screen.
+	- "Gamma" : Change the gamma of the screen.
+	- "Save score" : Automatically save score after each game.
+	- "Restart game" : Automatically start a new game after player lose the current one.
+	- "Collect cookies" : Doesn't do anything (maybe ?). Can't be uncheck.
+	- "Show scoreboard" : When check, show the scoreboard on the game screen when the mouse is over it.
+	- "Show next fruit" : When check, show the next fruit on the game screen.
+	- "Show help line" : When check, allow to display the help line on the game screen.
+	- "Difficulty" : Can modify the difficulty of the game.
+		- "Easy" : Fruits are smaller. When sort the bag, will give score.
+		- "Medium" : Regular difficulty, all default parameters.
+		- "Hard" : Fruits are bigger.
+		- "Impossible" : Fruits are huge. Only the 4th first smallest fruit are available instead of 5.
+	- "Draw bg behind skin" : Display a circle behind each fruit to see its hitbox.
+	  Unlock at level 2 (with first skin).
+	- "Repeat music" : Play the current music endlessly.
+	- "Music" : Modify the music volume.
+	- "Sounds" : Modify the sounds volume.
+- [Q] "Quit" : Close the game.
 
 -Images-
 ![Create your profile](images/screenshots/create_profile.png)
