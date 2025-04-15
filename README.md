@@ -1,8 +1,11 @@
 # SuikaFruit
+![Icon](images/screenshots/icon.png)
 
 A puzzle game where you drop balls in a bag and merge them !
 
 It's more addictive than it looks like.
+
+*Any resemblance to an existing game is coincidental*
 
 ***
 ## Vocabulary :
@@ -12,6 +15,7 @@ It's more addictive than it looks like.
 - Bag : The place where alll the fruits goes.
 - Fruitopedia : Give the name, size, weight and given score of each fruit.
 - Account / profile : Some data about player's previous games, current level, etc.
+![Player's profile](images/screenshots/profile.png)
 - Experience : Gained at the end of a game. Use to level up player's profile.
 - Power : A capacity that allow player to usually modify a fruit. Can change the current of the game !
 - Skin : A different appearance of a fruit. To give them funny aspect.
@@ -50,6 +54,7 @@ It's more addictive than it looks like.
 
 ***
 ## Installation guide
+![Main menu](images/screenshots/main_menu.png)
 
 - Click on the green "<> Code" button
 - On Local/SSH/, click on "Download as zip"
@@ -64,6 +69,7 @@ It's more addictive than it looks like.
 #### Methods
 - [RETURN] "Play" : Launch the game.
 	- Connexion : Connect or create your profile
+![Create your profile](images/screenshots/create_profile.png)
 		- "Player" : Choose a pseudonyme. Just click on backspace once to erase 'Player'.
     	  Can be 'One Shot' (me), 'OneShot666' (my profile), 'Player' (default pseudo) or 'Bot'.
     	  Please don't use any bad words.
@@ -74,6 +80,7 @@ It's more addictive than it looks like.
 			- "Vertical/Horizontal" : Change the direction of the banner you will create.
 			- "Create" : Create a banner with the selected colors and direction.
 		- "Skins" : Personnalize your avatar ! Choose one image among the skins.
+![Skins screen](images/screenshots/skins.png)
 			- "Random" : If you don't want to choose, let chance choose for you !
 			- (skins) : Change your avatar.
   		- "Faces" : Personnalize your expression !
@@ -83,7 +90,9 @@ It's more addictive than it looks like.
 		- [H] "Show/Hide help line" : Show or hide the help line.
   		  Help line : a vertical line under the current fruit position to help see where it should land.
 		- [F] "Fruitopedia" : Open the fruitopedia screen to have information about the fruits.
+![Fruitopedia](images/screenshots/fruitopedia.png)
 		- [SPACE] "Pause game" : Pause the game and open the pause screen.
+![Pause screen](images/screenshots/pause.png)
 		- [P] "Parameters" (mouse on toothed wheel icon) : Open the parameters screen.
 		- [RETURN] "Back to menu" : If the game have started (at least one fruit in the bag), open a warning screen.
   		  Else, directly go back to main menu.
@@ -99,10 +108,12 @@ It's more addictive than it looks like.
 	- [LEFT CLICK] "Set banner" : To change player's banner. Open profile edition screen, banners tab.
 	- "Unlog" : Deconnect player's account. Will go back to main menu.
 - [H] "Help" : Open/close help note screen.
+![Music screen](images/screenshots/music.png)
 - [M] "Mute" : Mute/unmute music.
 - [ARROW UP] : Increase music volume.
 - [ARROW DOWN] : Reduce music volume.
 - [P] "Parameters" : Open/close parameters screen.
+![Parameters screen](images/screenshots/parameters.png)
 	- [TAB] "Next parameter" : Select next parameter for modification.
 	- [MAJ + TAB] "Previous parameter" : Select previous parameter for modification.
 	- [RETURN] "Modify checkbox" : Check/uncheck a checkbox parameter.
@@ -128,19 +139,6 @@ It's more addictive than it looks like.
 	- "Music" : Modify the music volume.
 	- "Sounds" : Modify the sounds volume.
 - [Q] "Quit" : Close the game.
-
--Images-
-![Create your profile](images/screenshots/create_profile.png)
-![Fruitopedia](images/screenshots/fruitopedia.png)
-![Icon](images/screenshots/icon.png)
-![Main menu](images/screenshots/main_menu.png)
-![Music screen](images/screenshots/music.png)
-![Parameters screen](images/screenshots/parameters.png)
-![Pause screen](images/screenshots/pause.png)
-![Powers screen](images/screenshots/powers.png)
-![Player's profile](images/screenshots/profile.png)
-![Scoreboard](images/screenshots/scoreboard.png)
-![Skins screen](images/screenshots/skins.png)
 
 ***
 ## Roadmap
@@ -180,6 +178,7 @@ It's more addictive than it looks like.
 	- Make buttons work
 	- Launch project on GitHub
 - v0.1.3 :
+![Scoreboard](images/screenshots/scoreboard.png)
 	- Add scoreboard screen
 	- Add save scores function for scoreboard
 	- Add Fruitopedia screen
@@ -213,6 +212,7 @@ It's more addictive than it looks like.
 	- Allow to click on buttons
 	- Minors changes
 - v0.2.3 :
+![Powers screen](images/screenshots/powers.png)
 	- Add powers (make them cost score) :
 		- pop a fruit
 		- sort basket
