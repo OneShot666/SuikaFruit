@@ -20,6 +20,8 @@ A puzzle game where you drop balls in a bag and merge them !
 ## Rules :
 
 - rule 1
+- rule 1
+- rule 1
 
 ***
 ## Prerequisites :
@@ -55,19 +57,23 @@ A puzzle game where you drop balls in a bag and merge them !
 
 #### Methods
 - "name" (options) : result
+- "name" (options) : result
+- "name" (options) : result
+- "name" (options) : result
+- "name" (options) : result
 
 -Images-
-![name](link)
-![name](link)
-![name](link)
-![name](link)
-![name](link)
-![name](link)
-![name](link)
-![name](link)
-![name](link)
-![name](link)
-![name](link)
+![Create your profile](images/screenshots/create_profile.png)
+![Fruitopedia](images/screenshots/fruitopedia.png)
+![Icon](images/screenshots/icon.png)
+![Main menu](images/screenshots/main_menu.png)
+![Music screen](images/screenshots/music.png)
+![Parameters screen](images/screenshots/parameters.png)
+![Pause screen](images/screenshots/pause.png)
+![Powers screen](images/screenshots/powers.png)
+![Player's profile](images/screenshots/profile.png)
+![Scoreboard](images/screenshots/scoreboard.png)
+![Skins screen](images/screenshots/skins.png)
 
 ***
 ## Roadmap
