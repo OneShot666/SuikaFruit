@@ -19,9 +19,13 @@ A puzzle game where you drop balls in a bag and merge them !
 ***
 ## Rules :
 
-- rule 1
-- rule 1
-- rule 1
+- You have to connect or create an account before playing (might change that in the futur).
+- You can only drop one fruit at a time.
+- Fruits can only merge with fruits with the same name (name depends of the current skin).
+- The bigger a fruit get, the heavier it is.
+- The skins doesn't change the fruit's attributes, hitbox or gameplay, just it appearance.
+- A power will cost score and can be use once (Must be buy again to be reuse).
+- Difficulty "Impossible" only allow to drop the 4th first smallest fruit (instead of 5)
 
 ***
 ## Prerequisites :
@@ -56,6 +60,22 @@ A puzzle game where you drop balls in a bag and merge them !
 ## User guide
 
 #### Methods
+- [RETURN] "Play" : result
+	- "Choose a speudo" : result
+	- "Choose a banner" : result
+	- "Choose an avatar" : result
+- [A] "Profile" : result
+	- [LEFT CLICK] "Set avatar" : result
+	- [LEFT CLICK] "Set banner" : result
+- [H] "Help" : result
+- [P] "Parameters" : result
+	- "name" (options) : result
+	- "name" (options) : result
+	- "name" (options) : result
+	- "name" (options) : result
+	- "name" (options) : result
+- [Q] "Quit" : result
+- "name" (options) : result
 - "name" (options) : result
 - "name" (options) : result
 - "name" (options) : result
@@ -162,7 +182,8 @@ A puzzle game where you drop balls in a bag and merge them !
 - v0.2.6 :
 	- Add rolling fruit on menu (use a timer)
 	- Add skin screen
-	- Add skins background and overlay
+	- Add skins background (transparent circle to make hitbox clearer)
+	- Add skins overlay (display data when mouse on it) : only work on skins screen
 - v0.2.7 :
 	- Add level with xp (based on score)
 	- Add accounts
