@@ -5,7 +5,16 @@ A puzzle game where you drop balls in a bag and merge them !
 ***
 ## Vocabulary :
 
-- term : definition
+- Ball / Fruit : An object that can be throw in the bag and merge with another object with the same name.
+- Merge : When 2 fruits collide to become a bigger fruit.
+- Bag : The place where alll the fruits goes.
+- Fruitopedia : Give the name, size, weight and given score of each fruit.
+- Account / profile : Some data about player's previous games, current level, etc.
+- Experience : Gained at the end of a game. Use to level up player's profile.
+- Power : A capacity that allow player to usually modify a fruit. Can change the current of the game !
+- Skin : A different appearance of a fruit. To give them funny aspect.
+- Current fruit : The fruit that is about to be drop.
+- Next fruit : Will become the new current fruit after the current one will be drop.
 
 ***
 ## Rules :
@@ -18,18 +27,18 @@ A puzzle game where you drop balls in a bag and merge them !
 - Python 3.11.1 or below
 - Python interpreter
 - Librairies :
-    - copy : Use to make copy of object without altering them.
-    - math : Use to make mathematical operations (squareroot, degrees, exponential, power).
-    - mutagen : Use to get a music file length.
-    - os : Use to access and rename files and create directories and files.
-    - PIL : Use to open, manipulates or apply filter on images.
-    - pymunk : Use to add physics in the game (gravity and collisions). 
-    - pygame : Use to manage the whole program interface.
-    - random : Use to randomly create numbers or randomly choose an element in a list (like ball).
-    - string : Use to get the alphabet.
-    - sys : Use to safely close game.
-    - time : Use to get current time or use and manipulate time formats.
-    - webcolors : Use to transform and manipulate color names and rgb values.
+	- copy : 		Use to make copy of object without altering them.
+	- math : 		Use to make mathematical operations (squareroot, degrees, exponential, power).
+	- mutagen : 	Use to get a music file length.
+	- os : 			Use to access and rename files and create directories and files.
+	- PIL : 		Use to open, manipulates or apply filter on images.
+	- pymunk : 		Use to add physics in the game (gravity and collisions). 
+	- pygame : 		Use to manage the whole program interface.
+	- random : 		Use to randomly create numbers or randomly choose an element in a list (like ball).
+	- string : 		Use to get the alphabet.
+	- sys : 		Use to safely close game.
+	- time : 		Use to get current time or use and manipulate time formats.
+	- webcolors : 	Use to transform and manipulate color names and rgb values.
 
 ***
 ## Installation guide
@@ -48,6 +57,16 @@ A puzzle game where you drop balls in a bag and merge them !
 - "name" (options) : result
 
 -Images-
+![name](link)
+![name](link)
+![name](link)
+![name](link)
+![name](link)
+![name](link)
+![name](link)
+![name](link)
+![name](link)
+![name](link)
 ![name](link)
 
 ***
