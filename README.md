@@ -62,25 +62,38 @@ It's more addictive than it looks like.
 ## User guide
 
 #### Methods
-- [RETURN] "Play" : result
-	- Connexion : result
-		- "Choose a speudo" : result
-		- "Choose a banner" : result
-		- "Choose an avatar" : result
-	- Game : result
-		- [LEFT CLICK] "Drop fruit" : result
-		- [H] "Hide/Show help line" : result
-		- [F] "Fruitopedia" : result
-		- [SPACE] "Pause game" : result
-		- [P] "Parameters" (mouse on toothed wheel icon) : result
-		- [RETURN] "Back to menu" : result
-			- "Back to menu ?" : result
-		- [Q] "Quit game" : result
-		- "Scoreboard" (mouse on score) : result
-		- "Watermelon" (mouse on watermelon): result
-		- "Profile" (mouse on avatar) : result
-		- "Skins" (mouse on clothes icon) : result
-		- "Shopping" (mouse on shop icon) : result
+- [RETURN] "Play" : Launch the game.
+	- Connexion : Connect or create your profile
+		- "Player" : Choose a pseudonyme. Just click on backspace once to erase 'Player'.
+    	  Can be 'One Shot' (me), 'OneShot666' (my profile), 'Player' (default pseudo) or 'Bot'.
+    	  Please don't use any bad words.
+		- "Banners" : Personnalize your banner ! Choose 2 colors and the direction to create a nice gradient.
+			- "Random" : If you don't want to choose, let chance choose for you !
+			- (colors) : Select 2 colors.
+			- (banners) : Change your banner.
+			- "Vertical/Horizontal" : Change the direction of the banner you will create.
+			- "Create" : Create a banner with the selected colors and direction.
+		- "Skins" : Personnalize your avatar ! Choose one image among the skins.
+			- "Random" : If you don't want to choose, let chance choose for you !
+			- (skins) : Change your avatar.
+  		- "Faces" : Personnalize your expression !
+			- (faces) : Change your face.
+	- Game : During the game.
+		- [LEFT CLICK] "Drop fruit" : Let the current fruit fall in the bag.
+		- [H] "Show/Hide help line" : Show or hide the help line.
+  		  Help line : a vertical line under the current fruit position to help see where it should land.
+		- [F] "Fruitopedia" : Open the fruitopedia screen to have information about the fruits.
+		- [SPACE] "Pause game" : Pause the game and open the pause screen.
+		- [P] "Parameters" (mouse on toothed wheel icon) : Open the parameters screen.
+		- [RETURN] "Back to menu" : If the game have started (at least one fruit in the bag), open a warning screen.
+  		  Else, directly go back to main menu.
+			- "Back to menu ?" : Warning screen to warn player going back to the menu will delete current game.
+		- [Q] "Quit game" : Close the game.
+		- "Scoreboard" (mouse on score) : Show the scoreboard with the best score among players.
+		- "Watermelon" (mouse on watermelon): Show the number of watermelon made during the game.
+		- "Profile" (mouse on avatar) : Show the profile of the player.
+		- "Skins" (mouse on clothes icon) : Show the skins screen.
+		- "Shopping" (mouse on shop icon) : Show the shopping screen with the powers (cost score).
 - [A] "Profile" : result
 	- [LEFT CLICK] "Set avatar" : result
 	- [LEFT CLICK] "Set banner" : result
@@ -89,11 +102,29 @@ It's more addictive than it looks like.
 - [ARROW UP] : Increase music volume
 - [ARROW DOWN] : Reduce music volume
 - [P] "Parameters" : result
-	- "name" (options) : result
-	- "name" (options) : result
-	- "name" (options) : result
-	- "name" (options) : result
-	- "name" (options) : result
+	- [TAB] "Next parameter" : result
+	- [MAJ + TAB] "Previous parameter" : result
+	- [RETURN] "Modify checkbox" : result
+	- [ARROW LEFT/RIGHT] "Modify gradient" : result
+	- [N] "Next music" : result
+	- "Fullscreen" : result
+	- "Luminosity" : result
+	- "Gamma" : result
+	- "Save score" : result
+	- "Restart game" : result
+	- "Collect cookies" : result
+	- "Show scoreboard" : result
+	- "Show next fruit" : result
+	- "Show help line" : result
+	- "Difficulty" : result
+		- "Easy" : result
+		- "Medium" : result
+		- "Hard" : result
+		- "Impossible" : result
+	- "Draw bg behind skin" : result
+	- "Repeat music" : result
+	- "Music" : result
+	- "Sounds" : result
 - [Q] "Quit" : result
 
 -Images-
